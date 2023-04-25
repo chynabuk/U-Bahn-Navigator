@@ -27,7 +27,7 @@ public class SubwayNetwork {
             }
         }
         //Eine IllegalArgumentException wird ausgelöst.
-        throw new IllegalArgumentException("Es wurde keine Station mit Namen[" + name + " gefunden");
+        throw new IllegalArgumentException("Es wurde keine Station mit Namen[" + name + "] gefunden");
     }
 
     //Linie Stationen holen.

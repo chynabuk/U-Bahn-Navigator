@@ -18,22 +18,22 @@ public class DijkstraAlgorithm implements ShortestPathFindingAlgorithm {
     }
 
     /*
-    Dies ist eine Methode, die den kürzesten Weg zwischen zwei Bahnhöfen berechnet und zurückgibt.
+    Dies ist eine Methode, die den kürzesten Weg zwischen zwei Stationen berechnet und zurückgibt.
     Die Methode nimmt zwei Stationsobjekte - start und ziel - als Parameter.
     */
     @Override
     public String getShortestPath(Station start, Station ziel) {
-        //Die Method "calculateShortestPathFromStart" aufgerufen.
-        calculateShortestPathFromStart(start, ziel);
+        //Die Methode "calculateShortestPath" wird aufgerufen.
+        calculateShortestPath(start, ziel);
+
+        //Den kürzesten Weg aus dem Ziel-Stationsobjekt wird geholt und ihn in der Liste "shortestPath" gespeichert.
+        List<Station> shortestPath = ziel.getShortestPath();
 
         /*
         Die String Variable "result(Ergebnis)" wird mit Leere Zeichenfolge erstellt.
         In dieser Variable werden die Informationen des kürzesten Weges vom Start zum Ziel gespeichert.
         */
         String result = "";
-
-        //Den kürzesten Pfad aus dem Ziel-Stationsobjekt wird abgerupft und ihn in der Liste "shortestPath" gespeichert.
-        List<Station> shortestPath = ziel.getShortestPath();
 
         /*
         Die boolesche Variable "transferred" wird erstellt
@@ -55,7 +55,7 @@ public class DijkstraAlgorithm implements ShortestPathFindingAlgorithm {
             //Ob die aktuelle Station nicht die letzte Station in der Liste ist.
             if (i < shortestPath.size() - 1){
 
-                //und denselben Namen wie die nächste Station hat.
+                //Ob die aktuelle Station denselben Namen wie die nächste Station hat.
                 if (shortestPath.get(i).getName().equals(shortestPath.get(i + 1).getName())){
 
                     //Ob i gleich 0 ist, wird die Schleife übersprungen.
@@ -63,11 +63,11 @@ public class DijkstraAlgorithm implements ShortestPathFindingAlgorithm {
                         continue;
                     }
 
+                    //Der Stationsname und die Linie, in die geändert werden muss, werden zum Ergebnis hinzugefügt.
+                    result += shortestPath.get(i).getName() + " (Change to " + shortestPath.get(i + 1).getLine() + ")\n";
+
                     //Die Variable "transferred" wird auf true gesetzt.
                     transferred = true;
-
-                    //Der Stationsname und die Linie, in die geändert werden muss, werden der Ergebniszeichenfolge hinzugefügt.
-                    result += shortestPath.get(i).getName() + " (Change to " + shortestPath.get(i + 1).getLine() + ")\n";
 
                     //Die Schleife wird übersprungen.
                     continue;
@@ -96,16 +96,23 @@ public class DijkstraAlgorithm implements ShortestPathFindingAlgorithm {
         return result;
     }
 
-    //Die Methode berechnet den kürzesten Pfad vom Startstation zur Zielstation unter Verwendung des Dijkstra-Algorithmus.
-    private void calculateShortestPathFromStart(Station start, Station ziel) {
-        //Die Distanz der Startstation auf 0 zu setzen.
+    //Die Methode berechnet den kürzesten Weg vom Startstation zur Zielstation.
+    private void calculateShortestPath(Station start, Station ziel) {
+        //Die Distanz der Startstation auf 0 wird gesetzt.
         start.setDistance(0);
 
-        //Zwei Listen werden initialisiert, settledStations und unsettledStations
-        //visitedStations - besuchten Stationen.
+        /*
+        Zwei Listen werden initialisiert, settledStations und unsettledStations
+
+        settledStations - visitedStations - besuchten Stationen.
+        settledStations enthält Stationen, deren kürzester Pfad bereits berechnet wurde.
+         */
         List<Station> settledStations = new ArrayList<>();
 
-        //unvisitedStations - nicht besuchten Stationen.
+        /*
+        unsettledStations - unvisitedStations - nicht besuchten Stationen.
+        unsettledStations enthält alle Stationen, die noch nicht berechnet wurden.
+         */
         List<Station> unsettledStations = new ArrayList<>();
 
         //Die Startstation wird zur Liste "unsettledStations" hinzugefügt.
@@ -116,7 +123,7 @@ public class DijkstraAlgorithm implements ShortestPathFindingAlgorithm {
         //While-Schleife wird fortgesetzt, solange die aktuelle Station nicht die Zielstation ist.
         while (!current.equals(ziel)) {
             /*
-            In jeder Iteration wird der Algorithmus zuerst mit der Methode "getLowestDistanceStation"
+            In jeder Iteration wird zuerst mit der Methode "getLowestDistanceStation"
             die Station mit der geringsten Distanz in der Liste "unsettledStations" gefunden.
             */
             current = getLowestDistanceStation(unsettledStations);
@@ -134,7 +141,7 @@ public class DijkstraAlgorithm implements ShortestPathFindingAlgorithm {
                     //Die Mindestdistanz wird zu dieser Nachbarstation mit der Methode "calculateMinimumDistance()" berechnet.
                     calculateMinimumDistance(neighbourStation, edgeWeight, currentStation);
 
-                    //Ddie Nachbarstation wird zur Liste "Nicht unsettledStations" hinzugefügt.
+                    //Die Nachbarstation wird zur Liste "unsettledStations" hinzugefügt.
                     unsettledStations.add(neighbourStation);
                 }
             });

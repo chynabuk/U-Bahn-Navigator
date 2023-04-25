@@ -32,11 +32,11 @@ public class Main {
             System.out.println("Eingabe:");
 
             //Einen Wert für die Startstation wird eingegeben.
-            System.out.print("  Start: ");
+            System.out.print("Start: ");
             startString = scanner.nextLine();
 
             //Einen Wert für die Zielstation wird eingegeben.
-            System.out.print("  Ziel: ");
+            System.out.print("Ziel: ");
             zielString = scanner.nextLine();
 
             try {
@@ -44,8 +44,9 @@ public class Main {
                 Station start = subwayNetwork.getStationByName(startString);
                 Station ziel = subwayNetwork.getStationByName(zielString);
 
+                System.out.println("Ausgabe");
                 //Das Ergebnis des Dijkstra-Algorithmus wird angezeigt.
-                System.out.println("  " + dijkstraAlgorithm.getShortestPath(start, ziel));
+                System.out.println(dijkstraAlgorithm.getShortestPath(start, ziel));
 
                 //Alle Änderungen an den Stationen, die mit der Entfernung und dem kürzesten Weg verbunden sind, werden zurückgesetzt.
                 StationsEditorUtil.resetDistanceShortestAndPathChanges(subwayNetwork.getLineStations());

@@ -42,14 +42,14 @@ public class StationsEditorUtil {
                     stations.get(i).addNeighbourStation(stations.get(i + 1));
                 }
 
-                //Ob 0 weniger als i und i weniger als Größe der StationenListe,
+                //Ob 0 weniger als i und i weniger als Größe der StationenListe
                 if (0 < i && i < stations.size()){
 
                     //Die vorherige Station wird zur aktuellen Station als Nachbar hinzugefügt.
                     stations.get(i).addNeighbourStation(stations.get(i - 1));
                 }
 
-                //Ob die aktuelle Station Transfer Station ist.
+                //Ob die aktuelle Station Übertragungsstation ist.
                 if (stations.get(i).isTransferStation()){
 
                     //Die Methode "setupTransferStationNeighbour" wird ausgeführt.
