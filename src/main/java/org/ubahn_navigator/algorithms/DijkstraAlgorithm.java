@@ -129,7 +129,7 @@ public class DijkstraAlgorithm implements ShortestPathFindingAlgorithm {
             current = getLowestDistanceStation(unsettledStations);
             Station currentStation = current;
 
-            //Diese Station wird aus der Liste "unsettledStations entfernt".
+            //Diese Station wird aus der Liste "unsettledStations" entfernt.
             unsettledStations.remove(current);
 
             //Es wird über die Nachbarstationen der aktuellen Station iteriert.

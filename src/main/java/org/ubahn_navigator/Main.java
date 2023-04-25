@@ -44,7 +44,7 @@ public class Main {
                 Station start = subwayNetwork.getStationByName(startString);
                 Station ziel = subwayNetwork.getStationByName(zielString);
 
-                System.out.println("Ausgabe");
+                System.out.println("\nAusgabe:");
                 //Das Ergebnis des Dijkstra-Algorithmus wird angezeigt.
                 System.out.println(dijkstraAlgorithm.getShortestPath(start, ziel));
 
